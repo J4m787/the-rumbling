@@ -1,5 +1,12 @@
 body {
-    background-color:pink;
-    color :blue;
-    font-family:"Comic Sans Ms";
+    background: linear-gradient(#c8c2ae,#353535);
+    min-height: 100vh; 
+    color :#fffffa;
+    font-family: 'Shizuru', cursive;
+}
+
+#title {
+    text-align: center;
+    font-size: 130px;
+    
 }
