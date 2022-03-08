@@ -1,12 +1,46 @@
 body {
-    background: linear-gradient(#c8c2ae,#353535);
-    min-height: 100vh; 
-    color :#fffffa;
-    font-family: 'Shizuru', cursive;
+    background:#fffffa;
+    min-height: 200vh; 
+    margin:0;
 }
 
 #title {
     text-align: center;
     font-size: 130px;
-    
+    color :#000103;
+    font-family: 'Shizuru', cursive;
+    text-decoration: none;
+}
+.title2 {
+    text-align: center;
+    color :#000103;
+    font-family: 'Shizuru', cursive;
+    text-decoration: none;
+}
+#nav_bar {
+     text-align: center;
+     background-color: #93C48B;
+     margin:0%;
+     position:sticky;
+     bottom: 50;
+     right: 50;
+     top: 0px;
+     padding-top: 0.5%;
+     padding-bottom: 0.5%;
+     border-bottom: 2px solid #565254;
+}
+.nav_button {
+    margin-left: 50px;
+    text-align: center;
+    text-decoration:none ;
+    font-family: 'Caveat', cursive;
+    font-size: 20px;
+    color: #565254;
+    display: inline-block;
+   border-radius: 100px;
+   border: 2px solid #565254;
+   padding: 15px; 
+   width: 60px;
+   height: 30px;  
+
 }

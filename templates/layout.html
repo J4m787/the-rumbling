@@ -3,16 +3,20 @@
     <head>
         <title>Sneep</title>
         <link rel="stylesheet"  href="/static/styles.css">
-        <link href="https://fonts.googleapis.com/css2?family=Lato&family=Shizuru&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Lato&family=Shizuru&family=Caveat:wght@700&display=swap" rel="stylesheet">
 
     </head>
 </html>
 <body>
-    <header><h1 id="title">SNEEP</h1></header>
+   
 
-
-    <nav><h2>nav</h2></nav>
-    
+    <nav id="nav_bar">
+     <a class="nav_button" href="{{url_for('home')}}">Sneep</a>
+     <a class="nav_button" href="{{url_for('Jordans')}}">Jordans</a>
+     <a class="nav_button" href="{{url_for('Adidas')}}">Adidas</a>
+     <a class="nav_button" href="{{url_for('Nike')}}">Nike</a>
+     <a class="nav_button" href="{{url_for('Others')}}">Others</a>
+    </nav>
     {%block content%} {%endblock%}
 
     <footer><h4>footer</h4></footer>
