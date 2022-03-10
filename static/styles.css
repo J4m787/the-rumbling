@@ -41,6 +41,12 @@ body {
    border: 2px solid #565254;
    padding: 15px; 
    width: 60px;
-   height: 30px;  
+   height: 30px;
+   transition-duration: 0.4s;
+}
+.nav_button:hover  {
+    background-color: #fffffa;
 
 }
+
+
