@@ -5,6 +5,7 @@ from flask_login import logout_user, login_user, LoginManager, current_user, log
 from forms import LoginForm, RegistrationForm
 
 
+
 app=Flask(__name__)
 
 app.config['SECRET_KEY'] = 'Ligmaballz!!!'
@@ -17,11 +18,12 @@ login_manager.init_app(app)
 
 @login_manager.user_loader
 def load_user(id):
-    return models.User.query.get(int(id))
+    return models.user.query.get(int(id))
 
 @app.route("/")
 def home():
     return render_template('home.html')
+
 @app.route("/Adidas")
 def Adidas():
     return render_template('Jordans.html')
@@ -45,26 +47,26 @@ def search():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = models.User.query.filter_by(username=form.username.data).first()
+        user = models.user.query.filter_by(email=form.email.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('wrong password or username')
         else:
             login_user(user, remember=form.remember_me.data)
             flash('Logged in successfully.')
         next = request.args.get('next')
-        return redirect(next or url_for('index'))
+        return redirect(next or url_for('home'))
     return render_template('login.html', form=form)
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = models.User(email=form.email.data, username=form.email.data)
+        user = models.user(email=form.email.data)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
@@ -76,7 +78,7 @@ def register():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('home'))
 
 @app.route('/pizza/<int:id>')
 def pizza(id):

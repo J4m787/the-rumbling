@@ -6,10 +6,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 
 
-class user(UserMixin, db.Model):
-    __tablename__ = "user"
+class User(UserMixin, db.Model):
+    __tablename__ = "User"
     id = db.Column(db.Integer, primary_key=True)
-    favourite_id = db.Column(db.Integer, ForeignKey('favourite.id'))
+    favourite_id = db.Column(db.Integer, ForeignKey('Favourite.id'))
     email = db.Column(db.Text)
     password = db.Column(db.Text)
 
@@ -20,35 +20,35 @@ class user(UserMixin, db.Model):
         return check_password_hash(self.password, password)
 
     def __repr__(self):
-        return '<User{}>'.format(self.username)
+        return '<User{}>'.format(self.email)
 
-class shoe(db.Model):
-    __tablename__ = "shoe"
+class Shoe(db.Model):
+    __tablename__ = "Shoe"
     id = db.Column(db.Integer, primary_key=True)
-    favourite_id = db.Column(db.Integer, ForeignKey('favourite.id'))
-    silhouettes_id = db.Column(db.Integer, ForeignKey('silhouettes.id'))
+    favourite_id = db.Column(db.Integer, ForeignKey('Favourite.id'))
+    silhouettes_id = db.Column(db.Integer, ForeignKey('Silhouette.id'))
     name = db.Column(db.Text)
     description = db.Column(db.Text)
     image = db.Column(db.Text)
     price = db.Column(db.Text)
 
-class favourite(db.Model):
-    __tablename__ = "favourite"
+class Favourite(db.Model):
+    __tablename__ = "Favourite"
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, ForeignKey('user.id'))
-    shoe_id = db.Column(db.Integer, ForeignKey('shoe.id'))
+    user_id = db.Column(db.Integer, ForeignKey('User.id'))
+    shoe_id = db.Column(db.Integer, ForeignKey('Shoe.id'))
 
 class silhouette(db.Model):
-    __tablename__="silhouette"
+    __tablename__="Silhouette"
     id = db.Column(db.Integer, primary_key=True)
-    brands_id = db.Column(db.Integer, ForeignKey('brands.id'))
+    brands_id = db.Column(db.Integer, ForeignKey('Brand.id'))
     name = db.Column(db.Text)
     description = db.Column(db.Text)
     image = db.Column(db.Text)
 
-class brands(db.Model):
-    __tablename__ = "brands"
+class Brand(db.Model):
+    __tablename__ = "Brand"
     id = db.Column(db.Integer, primary_key=True)
-    silhouettes_id = db.Column(db.Integer, ForeignKey('silhouettes.id'))
+    silhouettes_id = db.Column(db.Integer, ForeignKey('Silhouette.id'))
     name = db.Column(db.Text)
     imagename = db.Column(db.Text)

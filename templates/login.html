@@ -7,8 +7,12 @@
     {% include 'search.html' %}
   </header>
 <main>
-  {% if current_user.is_authenticated %}
-  Hi {{ current_user.email }}!
-{% endif %}
+    <form class="login" method="post">
+        {{ form.csrf_token }}
+        {{form.email()}}
+        {{form.password()}}
+        {{form.remember_me()}}
+        <input type="submit" value="Go">
+      </form>
 </main>
 {%endblock%}

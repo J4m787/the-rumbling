@@ -46,7 +46,20 @@ body {
 }
 .nav_button:hover  {
     background-color: #fffffa;
+    width: 100px;
 
 }
 
+#user_icon {
+    font-size: 30px;
+    padding-left: 0px;
+    color: #565254;
+    transition-duration: 0.4s;
+    float:right;
+    margin-right:100px;
+    padding-top:15px;
 
+}
+#user_icon:hover{
+    color: #fffffa;
+}
