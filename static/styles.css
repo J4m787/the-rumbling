@@ -12,22 +12,39 @@ body {
     text-decoration: none;
 }
 .title2 {
-    text-align: center;
     color :#000103;
     font-family: 'Shizuru', cursive;
     text-decoration: none;
+}
+.title3 {
+    float:left;
+    text-decoration: none;
+    font-family: 'Shizuru', cursive;
+    font-size:50px;
+    color :#000103;
+    text-align: center;
+}
+.nav_sneep{
+    padding-bottom: 0px;
+    padding-top:0px;
+    text-align: center;
+    vertical-align: middle;
+    margin-top: -10px;
+    margin-left:50px;
+    
+}
+.title3:hover{
+    color: #fffffa;
 }
 #nav_bar {
      text-align: center;
      background-color: #93C48B;
      margin:0%;
      position:sticky;
-     bottom: 50;
-     right: 50;
-     top: 0px;
      padding-top: 0.5%;
      padding-bottom: 0.5%;
      border-bottom: 2px solid #565254;
+     top: -1px;
 }
 .nav_button {
     margin-left: 50px;
@@ -56,10 +73,59 @@ body {
     color: #565254;
     transition-duration: 0.4s;
     float:right;
-    margin-right:100px;
+    margin-right:90px;
     padding-top:15px;
 
 }
 #user_icon:hover{
     color: #fffffa;
+}
+
+.dropbtn {
+    background-color: inherit;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    font-size: 12px;
+    margin-right: 45px;
+  }
+  
+  .dropdown-content a {
+    color: #565254;
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+    font-family: 'Caveat', cursive;
+    font-size: 15px;
+  }
+  
+  .dropdown-content a:hover {background-color: #fffffa;}
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .dropdown:hover .dropbtn {
+    background-color: inherit;
+  }
+.searchbar {
+    text-align: center;
+    display: block;
+    min-width: 100px;
+
 }
