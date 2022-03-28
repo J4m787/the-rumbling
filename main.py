@@ -23,7 +23,6 @@ def load_user(id):
 @app.route("/")
 def home():
     return render_template('home.html')
-
 @app.route("/Adidas")
 def Adidas():
     return render_template('Jordans.html')
@@ -36,6 +35,9 @@ def Nike():
 @app.route("/Others")
 def Others():
     return render_template('Others.html')
+@app.route("/about")
+def about():
+    return render_template('about.html')
 
 @app.route("/search", methods=["POST"])
 def search():

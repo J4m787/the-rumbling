@@ -3,7 +3,7 @@
     <head>
         <title>SNeep</title>
         <link rel="stylesheet"  href="/static/styles.css">
-        <link href="https://fonts.googleapis.com/css2?family=Lato&family=Shizuru&family=Caveat:wght@700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Lato&family=Shizuru&family=Caveat&family=Patrick+Hand:wght@700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
         <script src="https://kit.fontawesome.com/12ad647e43.js" crossorigin="anonymous"></script>
 
@@ -32,9 +32,12 @@
    
 
     <footer class="footer">
-        <a class="footer_headings"  href="{{url_for('Jordans')}}">Jordans</a>
-        <a class="footer_headings"  href="{{url_for('Adidas')}}">Adidas</a>
-      
-        </footer>
-        {%block content%} {%endblock%}
+        <div id="footer_content">
+            <a class="footer_headings"  href="{{url_for('Jordans')}}">Jordans</a>
+            <a class="footer_headings"  href="{{url_for('Adidas')}}">Adidas</a>
+            <a class="footer_headings"  href="{{url_for('Nike')}}">Nike</a>
+            <a class="footer_headings"  href="{{url_for('Others')}}">Others</a>
+            <a class="footer_headings"  href="{{url_for('about')}}">about us</a>
+        </div>
+    </footer>
 </body> 
