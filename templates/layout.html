@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
     <head>
-        <title>Sneep</title>
+        <title>SNeep</title>
         <link rel="stylesheet"  href="/static/styles.css">
         <link href="https://fonts.googleapis.com/css2?family=Lato&family=Shizuru&family=Caveat:wght@700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
@@ -9,7 +9,7 @@
 
     </head>
 </html>
-<body>
+<body id="body">
    
 
     <nav id="nav_bar">
@@ -29,7 +29,12 @@
         </div>
         </div>
      </nav>
-    {%block content%} {%endblock%}
+   
 
-    <footer><h4>footer</h4></footer>
+    <footer class="footer">
+        <a class="footer_headings"  href="{{url_for('Jordans')}}">Jordans</a>
+        <a class="footer_headings"  href="{{url_for('Adidas')}}">Adidas</a>
+      
+        </footer>
+        {%block content%} {%endblock%}
 </body> 
