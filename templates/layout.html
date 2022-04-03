@@ -8,7 +8,7 @@
         <script src="https://kit.fontawesome.com/12ad647e43.js" crossorigin="anonymous"></script>
 
     </head>
-</html>
+
 <body id="body">
    
 
@@ -29,7 +29,8 @@
         </div>
         </div>
      </nav>
-   
+     {% block content %}
+     {% endblock %}
 
     <footer class="footer">
         <div id="footer_content">
@@ -41,3 +42,5 @@
         </div>
     </footer>
 </body> 
+
+</html>
