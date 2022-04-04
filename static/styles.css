@@ -151,13 +151,41 @@
 }
 .footer_headings {
   text-decoration:none;
-  padding:40px;
+  padding:50px;
   color: #F0EFF4;
   font-size: 25px;
 
   font-family: 'Patrick Hand', cursive;
 }
-#footer_content {
- margin-top: 20px;
+#footer_headingspos {
+  margin-top: 20px;
+}
 
+#footer_jordan {
+  position:absolute; left:500px; top: 50px;
+  list-style-type: none;
+  margin: 10;
+  padding-top: 10;
+}
+#footer_adida {
+  position:absolute; left:695px; top: 50px;
+  list-style-type: none;
+  margin: 10;
+  padding-top: 10;
+}
+#footer_nike{
+  position:absolute; left:890px; top: 50px;
+  list-style-type: none;
+  margin: 10;
+  padding-top: 10;
+}
+ol li {
+ padding-top: 12px;
+ font-size: 15px;
+ color: #fffffa;
+ font-style: normal;
+ text-align: left;
+}
+
+#footer_content {
 }
