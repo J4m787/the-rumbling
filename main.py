@@ -18,7 +18,7 @@ login_manager.init_app(app)
 
 @login_manager.user_loader
 def load_user(id):
-    return models.user.query.get(int(id))
+    return models.User.query.get(int(id))
 
 @app.route("/")
 def home():
@@ -46,13 +46,16 @@ def search():
     results = models.shoe.query.filter(models.shoe.name.query.like('%' + request.form.get("filter") + '%'))
     return render_template("searchresults.html", title="Search Results", results=results)
 
+@app.route("/searchbar", methods=["POST"])
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = models.user.query.filter_by(email=form.email.data).first()
+        user = models.User.query.filter_by(email=form.email.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('wrong password or username')
         else:
@@ -68,13 +71,15 @@ def register():
         return redirect(url_for('home'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = models.user(email=form.email.data)
+        user = models.User(email=form.email.data)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
         flash('You are now a registered user.')
-        return redirect(url_for('login'))
+        login_user(user)
+        return redirect(url_for('home'))
     return render_template("register.html", form=form)
+
 
 @app.route("/logout")
 @login_required
