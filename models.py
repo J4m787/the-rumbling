@@ -38,10 +38,10 @@ class Favourite(db.Model):
     user_id = db.Column(db.Integer, ForeignKey('User.id'))
     shoe_id = db.Column(db.Integer, ForeignKey('Shoe.id'))
 
-class silhouette(db.Model):
+class Silhouette(db.Model):
     __tablename__="Silhouette"
     id = db.Column(db.Integer, primary_key=True)
-    brands_id = db.Column(db.Integer, ForeignKey('Brand.id'))
+    brand_id = db.Column(db.Integer, ForeignKey('Brand.id'))
     name = db.Column(db.Text)
     description = db.Column(db.Text)
     image = db.Column(db.Text)

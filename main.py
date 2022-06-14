@@ -23,18 +23,28 @@ def load_user(id):
 @app.route("/")
 def home():
     return render_template('home.html')
-@app.route("/Adidas")
-def Adidas():
-    return render_template('Jordans.html')
+
 @app.route("/Jordans")
 def Jordans():
-    return render_template('Jordans.html')
+    results = models.Silhouette.query.filter_by(brand_id=1).order_by(models.Silhouette.name).all()
+    return render_template('Jordans.html', results=results)
+
+    
+@app.route("/Adidas")
+def Adidas():
+    results = models.Silhouette.query.filter_by(brand_id=2).order_by(models.Silhouette.name).all()
+    return render_template('Adidas.html', results=results)
+
 @app.route("/Nike")
 def Nike():
-    return render_template('Nike.html')
+    results = models.Silhouette.query.filter_by(brand_id=3).order_by(models.Silhouette.name).all()
+    return render_template('Nike.html',  results=results)
+
 @app.route("/Others")
 def Others():
-    return render_template('Others.html')
+ results = models.Silhouette.query.filter_by(brand_id=4).order_by(models.Silhouette.name).all()
+ return render_template('Others.html',  results=results)
+
 @app.route("/about")
 def about():
     return render_template('about.html')

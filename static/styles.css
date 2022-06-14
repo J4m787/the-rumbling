@@ -163,6 +163,7 @@
     text-align: center;
     display: block;
     min-width: 100px;  
+    border-radius: 100px;
 }
 #search {
   font-family: 'caveat', cursive;
@@ -172,6 +173,7 @@
   padding-right: 10px;
   border-color: #565254;
   border:solid;
+  border-radius: 100px;
 }
 
 
@@ -260,9 +262,50 @@ ol li {
  text-align: left;
 }
 
-#footer_content {
+.Jordan1disc {
+  max-width: 400px;
+  font-size:20px;
+  float: left;
+  margin: 50px;
+
 }
 
-#test {
-  font-family:  class="fa-solid fa-magnifying-glass"
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-column-gap: 30px;
+  grid-row-gap: 10px;
 }
+
+.container {
+  border: 0px solid #CCCCC8;
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  text-align: middle;
+  padding: 10px;
+  overflow-y: auto;
+  font-size: 20px;
+  height: 100%;
+  margin-top: 100px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+
+.jordan1image{
+  margin:20px;
+ max-width:100px;
+ height:auto;
+ padding:100px;
+}
+
+.jordannames{
+  text-decoration: none;
+  color: #000103;
+
+}
+.descriptionr{
+  
+}
+
+
