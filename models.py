@@ -26,7 +26,7 @@ class Shoe(db.Model):
     __tablename__ = "Shoe"
     id = db.Column(db.Integer, primary_key=True)
     favourite_id = db.Column(db.Integer, ForeignKey('Favourite.id'))
-    silhouettes_id = db.Column(db.Integer, ForeignKey('Silhouette.id'))
+    silhouette_id = db.Column(db.Integer, ForeignKey('Silhouette.id'))
     name = db.Column(db.Text)
     description = db.Column(db.Text)
     image = db.Column(db.Text)
@@ -45,6 +45,7 @@ class Silhouette(db.Model):
     name = db.Column(db.Text)
     description = db.Column(db.Text)
     image = db.Column(db.Text)
+    link = db.Column(db.Text)
 
 class Brand(db.Model):
     __tablename__ = "Brand"

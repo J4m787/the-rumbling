@@ -1,7 +1,7 @@
 <div class="grid-container">
     {% for results in results%}
       <div class = "container">
-                  <a  href="{{url_for('home')}}" ><img src="{{results.image}}" alt="SHOE" height="100px" width="autocomplete"></a>
+                  <a  href="{{url_for(results.link)}}" ><img src="{{results.image}}" alt="SHOE" height="100px" width="autocomplete"></a>
                   <p><b><a class="jordannames"  href="{{url_for('home')}}">{{results.name}}</a></b></p>
                   <p class="descriptionr">{{results.description}}</p>
       </div>

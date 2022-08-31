@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{%block content%}
+
+<body>
+
+<div class="wrapper">
+    {% for results in results%}
+    <div>
+        <a  href="{{url_for('home')}}" ><img src="{{results.image}}" alt="SHOE" height="100px" width="autocomplete"></a>
+                  <p><b><a class="1"  href="{{url_for('home')}}">{{results.name}}</a></b></p>
+                  <p class="1">{{results.price}}</p>
+    </div>
+    {% endfor %}    
+</body>
+
+
+{% endblock %}

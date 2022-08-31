@@ -14,11 +14,16 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 login_manager = LoginManager()
-login_manager.init_app(app)
+login_manager.init_app(app) 
 
 @login_manager.user_loader
 def load_user(id):
     return models.User.query.get(int(id))
+
+'''@app.context_processor
+def context_processor():
+    results = models.Silhouette.query.filter_by().order_by(models.Silhouette.id).all()
+    return results'''
 
 @app.route("/")
 def home():
@@ -26,7 +31,7 @@ def home():
 
 @app.route("/Jordans")
 def Jordans():
-    results = models.Silhouette.query.filter_by(brand_id=1).order_by(models.Silhouette.name).all()
+    results = models.Silhouette.query.filter_by(brand_id=1).order_by(models.Silhouette.id).all()
     return render_template('Jordans.html', results=results)
 
     
@@ -49,11 +54,98 @@ def Others():
 def about():
     return render_template('about.html')
 
+@app.route("/Jordan1")
+def Jordan1():
+    results = models.Shoe.query.filter_by(silhouette_id=1).order_by(models.Shoe.name).all()
+    return render_template('table.html', results=results)
+
+@app.route("/Jordan3")
+def Jordan3():
+    results = models.Shoe.query.filter_by(silhouette_id=2).order_by(models.Shoe.name).all()
+    return render_template('table.html', results=results)
+
+
+@app.route("/Jordan4")
+def Jordan4():
+    results = models.Shoe.query.filter_by(silhouette_id=4).order_by(models.Shoe.name).all()
+    return render_template('table.html', results=results)
+
+@app.route("/Jordan11")
+def Jordan11():
+    results = models.Shoe.query.filter_by(silhouette_id=5).order_by(models.Shoe.name).all()
+    return render_template('table.html', results=results)
+
+@app.route("/Yeezy350")
+def Yeezy350():
+    results = models.Shoe.query.filter_by(silhouette_id=6).order_by(models.Shoe.name).all()
+    return render_template('table.html', results=results)
+
+@app.route("/Yeezy500")
+def Yeezy500():
+    results = models.Shoe.query.filter_by(silhouette_id=7).order_by(models.Shoe.name).all()
+    return render_template('table.html', results=results)
+
+@app.route("/Yeezy700")
+def Yeezy700():
+    results = models.Shoe.query.filter_by(silhouette_id=8).order_by(models.Shoe.name).all()
+    return render_template('table.html', results=results)
+
+@app.route("/YeezySlides")
+def YeezySlides():
+    results = models.Shoe.query.filter_by(silhouette_id=9).order_by(models.Shoe.name).all()
+    return render_template('table.html', results=results)
+
+@app.route("/Af1")
+def Af1():
+    results = models.Shoe.query.filter_by(silhouette_id=11).order_by(models.Shoe.name).all()
+    return render_template('table.html', results=results)
+
+@app.route("/AirMax97")
+def AirMax97():
+    results = models.Shoe.query.filter_by(silhouette_id=12).order_by(models.Shoe.name).all()
+    return render_template('table.html', results=results)
+
+@app.route("/Blazer")
+def Blazer():
+    results = models.Shoe.query.filter_by(silhouette_id=13).order_by(models.Shoe.name).all()
+    return render_template('table.html', results=results)
+
+@app.route("/Nikesb")
+def Nikesb():
+    results = models.Shoe.query.filter_by(silhouette_id=10).order_by(models.Shoe.name).all()
+    return render_template('table.html', results=results)
+
+@app.route("/NB550")
+def NB550():
+    results = models.Shoe.query.filter_by(silhouette_id=14).order_by(models.Shoe.name).all()
+    return render_template('table.html', results=results)
+
+@app.route("/NB990")
+def NB990():
+    results = models.Shoe.query.filter_by(silhouette_id=15).order_by(models.Shoe.name).all()
+    return render_template('table.html', results=results)
+
+@app.route("/NB993")
+def NB993():
+    results = models.Shoe.query.filter_by(silhouette_id=16).order_by(models.Shoe.name).all()
+    return render_template('table.html', results=results)
+
+@app.route("/Converse")
+def Converse():
+    results = models.Shoe.query.filter_by(silhouette_id=17).order_by(models.Shoe.name).all()
+    return render_template('table.html', results=results)
+
+
+@app.route("/table")
+def table():
+    results = models.Shoe.query.order_by(models.Shoe.name).all()
+    return render_template('table.html', results=results)
+
 @app.route("/search", methods=["POST"])
 def search():
     # searchbar.
     # searches for anything that is similar to whatever the user inputted.
-    results = models.shoe.query.filter(models.shoe.name.query.like('%' + request.form.get("filter") + '%'))
+    results = models.Shoe.query.filter(models.Shoe.name.query.like('%' + request.form.get("filter") + '%'))
     return render_template("searchresults.html", title="Search Results", results=results)
 
 @app.route("/searchbar", methods=["POST"])
