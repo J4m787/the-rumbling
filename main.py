@@ -8,7 +8,7 @@ from forms import LoginForm, RegistrationForm
 
 app=Flask(__name__)
 
-app.config['SECRET_KEY'] = 'Ligmaballz!!!'
+app.config['SECRET_KEY'] = 'IRD'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///shu.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -50,9 +50,7 @@ def Others():
  results = models.Silhouette.query.filter_by(brand_id=4).order_by(models.Silhouette.name).all()
  return render_template('Others.html',  results=results)
 
-@app.route("/about")
-def about():
-    return render_template('about.html')
+
 
 @app.route("/Jordan1")
 def Jordan1():
@@ -141,14 +139,6 @@ def table():
     results = models.Shoe.query.order_by(models.Shoe.name).all()
     return render_template('table.html', results=results)
 
-@app.route("/search", methods=["POST"])
-def search():
-    # searchbar.
-    # searches for anything that is similar to whatever the user inputted.
-    results = models.Shoe.query.filter(models.Shoe.name.query.like('%' + request.form.get("filter") + '%'))
-    return render_template("searchresults.html", title="Search Results", results=results)
-
-@app.route("/searchbar", methods=["POST"])
 
 
 @app.route('/login', methods=['GET', 'POST'])
