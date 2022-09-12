@@ -25,38 +25,47 @@ def context_processor():
     results = models.Silhouette.query.filter_by().order_by(models.Silhouette.id).all()
     return results'''
 
+
 @app.route("/")
 def home():
     return render_template('home.html')
 
+# route renders the Jordans page
 @app.route("/Jordans")
 def Jordans():
     results = models.Silhouette.query.filter_by(brand_id=1).order_by(models.Silhouette.id).all()
     return render_template('Jordans.html', results=results)
 
-    
+
+# route renders the Adidas page
 @app.route("/Adidas")
 def Adidas():
     results = models.Silhouette.query.filter_by(brand_id=2).order_by(models.Silhouette.name).all()
     return render_template('Adidas.html', results=results)
 
+
+# route renders the Nike page
 @app.route("/Nike")
 def Nike():
     results = models.Silhouette.query.filter_by(brand_id=3).order_by(models.Silhouette.name).all()
     return render_template('Nike.html',  results=results)
 
+
+# route renders the Others page
 @app.route("/Others")
 def Others():
  results = models.Silhouette.query.filter_by(brand_id=4).order_by(models.Silhouette.name).all()
  return render_template('Others.html',  results=results)
 
 
-
+# route renders the Jordans 2 page
 @app.route("/Jordan1")
 def Jordan1():
     results = models.Shoe.query.filter_by(silhouette_id=1).order_by(models.Shoe.name).all()
     return render_template('table.html', results=results)
 
+
+# route renders the Jordans 3 page
 @app.route("/Jordan3")
 def Jordan3():
     results = models.Shoe.query.filter_by(silhouette_id=2).order_by(models.Shoe.name).all()
@@ -68,65 +77,78 @@ def Jordan4():
     results = models.Shoe.query.filter_by(silhouette_id=4).order_by(models.Shoe.name).all()
     return render_template('table.html', results=results)
 
+
 @app.route("/Jordan11")
 def Jordan11():
     results = models.Shoe.query.filter_by(silhouette_id=5).order_by(models.Shoe.name).all()
     return render_template('table.html', results=results)
+
 
 @app.route("/Yeezy350")
 def Yeezy350():
     results = models.Shoe.query.filter_by(silhouette_id=6).order_by(models.Shoe.name).all()
     return render_template('table.html', results=results)
 
+
 @app.route("/Yeezy500")
 def Yeezy500():
     results = models.Shoe.query.filter_by(silhouette_id=7).order_by(models.Shoe.name).all()
     return render_template('table.html', results=results)
+
 
 @app.route("/Yeezy700")
 def Yeezy700():
     results = models.Shoe.query.filter_by(silhouette_id=8).order_by(models.Shoe.name).all()
     return render_template('table.html', results=results)
 
+
 @app.route("/YeezySlides")
 def YeezySlides():
     results = models.Shoe.query.filter_by(silhouette_id=9).order_by(models.Shoe.name).all()
     return render_template('table.html', results=results)
+
 
 @app.route("/Af1")
 def Af1():
     results = models.Shoe.query.filter_by(silhouette_id=11).order_by(models.Shoe.name).all()
     return render_template('table.html', results=results)
 
+
 @app.route("/AirMax97")
 def AirMax97():
     results = models.Shoe.query.filter_by(silhouette_id=12).order_by(models.Shoe.name).all()
     return render_template('table.html', results=results)
+
 
 @app.route("/Blazer")
 def Blazer():
     results = models.Shoe.query.filter_by(silhouette_id=13).order_by(models.Shoe.name).all()
     return render_template('table.html', results=results)
 
+
 @app.route("/Nikesb")
 def Nikesb():
     results = models.Shoe.query.filter_by(silhouette_id=10).order_by(models.Shoe.name).all()
     return render_template('table.html', results=results)
+
 
 @app.route("/NB550")
 def NB550():
     results = models.Shoe.query.filter_by(silhouette_id=14).order_by(models.Shoe.name).all()
     return render_template('table.html', results=results)
 
+
 @app.route("/NB990")
 def NB990():
     results = models.Shoe.query.filter_by(silhouette_id=15).order_by(models.Shoe.name).all()
     return render_template('table.html', results=results)
 
+
 @app.route("/NB993")
 def NB993():
     results = models.Shoe.query.filter_by(silhouette_id=16).order_by(models.Shoe.name).all()
     return render_template('table.html', results=results)
+
 
 @app.route("/Converse")
 def Converse():
@@ -140,7 +162,7 @@ def table():
     return render_template('table.html', results=results)
 
 
-
+# route allows user to login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -157,6 +179,8 @@ def login():
         return redirect(next or url_for('home'))
     return render_template('login.html', form=form)
 
+
+# route allows user to register
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
@@ -173,16 +197,12 @@ def register():
     return render_template("register.html", form=form)
 
 
+# logout route
 @app.route("/logout")
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('home'))
-
-@app.route('/pizza/<int:id>')
-def pizza(id):
-        pizza= db.pizza.query.filter_by(id=id).first_or_404()
-        return render_template('pizza.html',pizza=pizza)
 
 if __name__ == "__main__":
     app.run(debug=True)

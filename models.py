@@ -53,3 +53,8 @@ class Brand(db.Model):
     silhouettes_id = db.Column(db.Integer, ForeignKey('Silhouette.id'))
     name = db.Column(db.Text)
     imagename = db.Column(db.Text)
+
+class ShoeColour(db.Model):
+    __tablename__ = "ShoeColour"
+    id = db.Column(db.Integer, primary_key=True)
+    shoe_id = db.Column(db.Integer, ForeignKey('shoe.id'))
