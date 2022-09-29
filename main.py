@@ -20,146 +20,53 @@ login_manager.init_app(app)
 def load_user(id):
     return models.User.query.get(int(id))
 
-'''@app.context_processor
-def context_processor():
-    results = models.Silhouette.query.filter_by().order_by(models.Silhouette.id).all()
-    return results'''
-
 
 @app.route("/")
 def home():
     return render_template('home.html')
 
 # route renders the Jordans page
-@app.route("/Jordans")
-def Jordans():
-    results = models.Silhouette.query.filter_by(brand_id=1).order_by(models.Silhouette.id).all()
-    return render_template('Jordans.html', results=results)
-
-
-# route renders the Adidas page
-@app.route("/Adidas")
-def Adidas():
-    results = models.Silhouette.query.filter_by(brand_id=2).order_by(models.Silhouette.name).all()
-    return render_template('Adidas.html', results=results)
-
-
-# route renders the Nike page
-@app.route("/Nike")
-def Nike():
-    results = models.Silhouette.query.filter_by(brand_id=3).order_by(models.Silhouette.name).all()
-    return render_template('Nike.html',  results=results)
-
-
-# route renders the Others page
-@app.route("/Others")
-def Others():
- results = models.Silhouette.query.filter_by(brand_id=4).order_by(models.Silhouette.name).all()
- return render_template('Others.html',  results=results)
+@app.route("/brand/<int:id>")
+def brand(id):
+    results = models.Brand.query.filter_by(id=id).first()
+    return render_template('brand.html', results=results)
 
 
 # route renders the Jordans 2 page
-@app.route("/Jordan1")
-def Jordan1():
-    results = models.Shoe.query.filter_by(silhouette_id=1).order_by(models.Shoe.name).all()
+@app.route("/silhouette/<int:id>")
+def silhouette(id):
+    results = models.Silhouette.query.filter_by(id=id).first()
     return render_template('table.html', results=results)
 
 
-# route renders the Jordans 3 page
-@app.route("/Jordan3")
-def Jordan3():
-    results = models.Shoe.query.filter_by(silhouette_id=2).order_by(models.Shoe.name).all()
-    return render_template('table.html', results=results)
+# Route to add game to favourites table
+@app.route("/favourite/<int:id>", methods=["GET", "POST"])
+@login_required  # requires user to be logged in to add favourite
+def favourite(id):
+    # Adds favourite game by assigining current user id to user id table
+    # and adds the game id to games id table.
+    user = models.User.query.filter_by(id=current_user.id).first_or_404()
+    shoe = models.Shoe.query.filter_by(id=id).first()
+    user.shoes.append(shoe)
+    db.session.merge(user)
+    db.session.commit()
+    return redirect(url_for("games_id", id=shoe.id))
 
 
-@app.route("/Jordan4")
-def Jordan4():
-    results = models.Shoe.query.filter_by(silhouette_id=4).order_by(models.Shoe.name).all()
-    return render_template('table.html', results=results)
-
-
-@app.route("/Jordan11")
-def Jordan11():
-    results = models.Shoe.query.filter_by(silhouette_id=5).order_by(models.Shoe.name).all()
-    return render_template('table.html', results=results)
-
-
-@app.route("/Yeezy350")
-def Yeezy350():
-    results = models.Shoe.query.filter_by(silhouette_id=6).order_by(models.Shoe.name).all()
-    return render_template('table.html', results=results)
-
-
-@app.route("/Yeezy500")
-def Yeezy500():
-    results = models.Shoe.query.filter_by(silhouette_id=7).order_by(models.Shoe.name).all()
-    return render_template('table.html', results=results)
-
-
-@app.route("/Yeezy700")
-def Yeezy700():
-    results = models.Shoe.query.filter_by(silhouette_id=8).order_by(models.Shoe.name).all()
-    return render_template('table.html', results=results)
-
-
-@app.route("/YeezySlides")
-def YeezySlides():
-    results = models.Shoe.query.filter_by(silhouette_id=9).order_by(models.Shoe.name).all()
-    return render_template('table.html', results=results)
-
-
-@app.route("/Af1")
-def Af1():
-    results = models.Shoe.query.filter_by(silhouette_id=11).order_by(models.Shoe.name).all()
-    return render_template('table.html', results=results)
-
-
-@app.route("/AirMax97")
-def AirMax97():
-    results = models.Shoe.query.filter_by(silhouette_id=12).order_by(models.Shoe.name).all()
-    return render_template('table.html', results=results)
-
-
-@app.route("/Blazer")
-def Blazer():
-    results = models.Shoe.query.filter_by(silhouette_id=13).order_by(models.Shoe.name).all()
-    return render_template('table.html', results=results)
-
-
-@app.route("/Nikesb")
-def Nikesb():
-    results = models.Shoe.query.filter_by(silhouette_id=10).order_by(models.Shoe.name).all()
-    return render_template('table.html', results=results)
-
-
-@app.route("/NB550")
-def NB550():
-    results = models.Shoe.query.filter_by(silhouette_id=14).order_by(models.Shoe.name).all()
-    return render_template('table.html', results=results)
-
-
-@app.route("/NB990")
-def NB990():
-    results = models.Shoe.query.filter_by(silhouette_id=15).order_by(models.Shoe.name).all()
-    return render_template('table.html', results=results)
-
-
-@app.route("/NB993")
-def NB993():
-    results = models.Shoe.query.filter_by(silhouette_id=16).order_by(models.Shoe.name).all()
-    return render_template('table.html', results=results)
-
-
-@app.route("/Converse")
-def Converse():
-    results = models.Shoe.query.filter_by(silhouette_id=17).order_by(models.Shoe.name).all()
-    return render_template('table.html', results=results)
-
-
-@app.route("/table")
-def table():
-    results = models.Shoe.query.order_by(models.Shoe.name).all()
-    return render_template('table.html', results=results)
+# route to remove a game from your favourites
+@app.route("/delete/<int:id>", methods=["GET", "POST"])
+@login_required # requires user to be logged in to remove a favourited game
+def delete(id):
+    user = models.User.query.filter_by(
+        id=current_user.id
+    ).first_or_404()
+    favourite_game = models.Game.query.filter_by(
+        id=id
+    ).first_or_404()
+    user.games.remove(favourite_game)
+    db.session.merge(user)
+    db.session.commit()
+    return redirect(url_for("games_id", id=favourite_game.id))
 
 
 # route allows user to login

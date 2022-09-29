@@ -1,9 +1,9 @@
 <div class="grid-container">
-    {% for results in results%}
+    {% for silhouette in results.silhouettes%}
       <div class = "container">
-        <a  href="{{url_for(results.link)}}" ><img src="{{results.image}}" alt="SHOE" height="100px" width="autocomplete"></a>
-        <p><b><a class="jordannames"  href="{{url_for('home')}}">{{results.name}}</a></b></p>
-        <p class="descriptionr">{{results.description}}</p>
+        <a  href="{{url_for('silhouette', id=silhouette.id)}}" ><img src="/{{silhouette.image}}" alt="SHOE" height="100px" width="autocomplete"></a>
+        <p><b><a class="jordannames"  href="{{url_for('home')}}">{{silhouette.name}}</a></b></p>
+        <p class="descriptionr">{{silhouette.description}}</p>
       </div>
     {% endfor %}
   </div>

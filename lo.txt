@@ -1,2 +1,0 @@
-git config user.name "j4m787"
-git config user.email "james.yuxin.li@hotmail.com"

@@ -4,11 +4,39 @@
 <body>
 
 <div class="wrapper">
-    {% for results in results%}
+    {% for shoe in results.shoes%}
     <div>
-        <a  href="{{url_for('home')}}" ><img src="{{results.image}}" alt="SHOE" height="100px" width="autocomplete"></a>
-        <p><b><a href="{{url_for('home')}}" class="deco"> {{results.name}}</a></b></p>
-        <p class="1">${{results.price}}</p>
+        <a  href="{{url_for('home')}}"><img src="/{{shoe.image}}" alt="SHOE" height="100px" width="autocomplete"></a>
+        <p><b><a href="{{url_for('home')}}" class="deco"> {{shoe.name}}</a></b></p>
+        <p class="1">${{shoe.price}}</p>
+                <!-- if user not signed in, tell them to sign in before favouriting -->
+                {% if current_user.is_anonymous %}
+                <form>
+                  <input type="button" value="Add to favourites" onclick="msg()">
+                </form>
+        
+                <script>
+                  function msg() {
+                    alert("Please log in first to add this shoe to your favourites!");
+                  }
+                </script>
+                <!-- else, if game hasn't been favourited show up with add button -->
+              <!-- if variable favourited has length (i.e it exists) -->
+              {% elif shoe in user.shoes %}
+                <div id="favourite_button">
+                  <!-- have remove from favourites button -->
+                  <button onclick="location.href=
+                  '{{ url_for('delete', id=shoe.id)}}'" type="button">
+                   <h3> Remove from favourites </h3></button>
+                </div>
+                <!-- if game has been favourited, show up with remove button -->
+              {% else %}
+                <div id="favourite_button">
+                  <button onclick="location.href=
+                  '{{ url_for('favourite', id=shoe.id)}}'" type="button">
+                   <h3> Add to favourites </h3></button>
+                </div>
+              {% endif %}
     </div>
     {% endfor %}    
 </body>

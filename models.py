@@ -3,7 +3,16 @@ from sqlalchemy import ForeignKey, true
 from main import db
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+from sqlalchemy.orm import relationship
 
+
+
+# Users and Champions association table many-many
+UserShoe = db.Table('UserShoe',
+    db.Column('id', db.Integer, primary_key=True, nullable=False),
+    db.Column('user_id', db.Integer, db.ForeignKey('User.id')),
+    db.Column('shoe_id', db.Integer, db.ForeignKey('Shoe.id'))
+)
 
 
 class User(UserMixin, db.Model):
@@ -12,6 +21,8 @@ class User(UserMixin, db.Model):
     favourite_id = db.Column(db.Integer, ForeignKey('Favourite.id'))
     email = db.Column(db.Text)
     password = db.Column(db.Text)
+    shoes = db.relationship('Shoe', secondary='UserShoe',
+                           back_populates='users')
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
@@ -22,21 +33,13 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return '<User{}>'.format(self.email)
 
-class Shoe(db.Model):
-    __tablename__ = "Shoe"
-    id = db.Column(db.Integer, primary_key=True)
-    favourite_id = db.Column(db.Integer, ForeignKey('Favourite.id'))
-    silhouette_id = db.Column(db.Integer, ForeignKey('Silhouette.id'))
-    name = db.Column(db.Text)
-    description = db.Column(db.Text)
-    image = db.Column(db.Text)
-    price = db.Column(db.Text)
 
-class Favourite(db.Model):
-    __tablename__ = "Favourite"
+class Brand(db.Model):
+    __tablename__ = "Brand"
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, ForeignKey('User.id'))
-    shoe_id = db.Column(db.Integer, ForeignKey('Shoe.id'))
+    name = db.Column(db.Text)
+    silhouettes = db.relationship('Silhouette', back_populates='brand')
+
 
 class Silhouette(db.Model):
     __tablename__="Silhouette"
@@ -46,15 +49,16 @@ class Silhouette(db.Model):
     description = db.Column(db.Text)
     image = db.Column(db.Text)
     link = db.Column(db.Text)
+    shoes = db.relationship('Shoe', back_populates='silhouette')
+    brand = db.relationship('Brand', back_populates='silhouettes')
 
-class Brand(db.Model):
-    __tablename__ = "Brand"
+
+class Shoe(db.Model):
+    __tablename__ = "Shoe"
     id = db.Column(db.Integer, primary_key=True)
-    silhouettes_id = db.Column(db.Integer, ForeignKey('Silhouette.id'))
+    silhouette_id = db.Column(db.Integer, ForeignKey('Silhouette.id'))
     name = db.Column(db.Text)
-    imagename = db.Column(db.Text)
-
-class ShoeColour(db.Model):
-    __tablename__ = "ShoeColour"
-    id = db.Column(db.Integer, primary_key=True)
-    shoe_id = db.Column(db.Integer, ForeignKey('shoe.id'))
+    image = db.Column(db.Text)
+    price = db.Column(db.Text)
+    silhouette = db.relationship('Silhouette', back_populates='shoes')
+    users = db.relationship('User', secondary='UserShoe', back_populates='shoes')
