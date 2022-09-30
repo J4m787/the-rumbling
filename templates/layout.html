@@ -11,23 +11,23 @@
     </head>
 
 <body id="body">
-    
-   
+
+
 
     <nav id="nav_bar">
      <h2 class="nav_sneep"><a class="title3" href="{{url_for('home')}}">SNeep</a></h2>
-    
-    
+
+
 </a id="nav">
-{% if current_user.is_authenticated %}
-    <a class="nav_button" href="{{url_for('favourites')}}">My Favourites</a>
+    {% if current_user.is_authenticated %}
+    <a class="nav_button" href="{{url_for('user_shoes')}}">My Shoes</a>
     {% endif %}
     <a class="nav_button" href="{{url_for('brand',id=1)}}">Jordans</a>
     <a class="nav_button" href="{{url_for('brand',id=2)}}">Adidas</a>
     <a class="nav_button" href="{{url_for('brand',id=3)}}">Nike</a>
     <a class="nav_button" href="{{url_for('brand',id=4)}}">Others</a>
 </a>
-     
+
      {% if not current_user.is_authenticated %}
      <div class="dropdown" style="float:right;">
         <button class="dropbtn"><i class="fa-solid fa-user-astronaut" id = "user_icon"></button></i>
@@ -42,7 +42,7 @@
             <button class="dropbtn"><i class="fa-solid fa-user-astronaut" id = "user_icon1"></button></i>
             <div class="dropdown-content">
         <a href="/logout">Logout</a>
-      
+
         {% endif %}
         </div>
         </div>
@@ -50,6 +50,6 @@
      {% block content %}
      {% endblock %}
 
-</body> 
+</body>
 
 </html>

@@ -9,36 +9,22 @@
         <img src="/{{shoe.image}}" alt="SHOE" height="100px" width="autocomplete">
         <p><b> {{shoe.name}}</b></p>
         <p class="1">${{shoe.price}}</p>
-                <!-- if user not signed in, tell them to sign in before favouriting -->
+        {# if user is not logged in tell them to login before they can add#}
                 {% if current_user.is_anonymous %}
-                <form>
-                  <input type="button" value="Add to favourites" onclick="msg()">
-                </form>
-        
-                <script>
-                  function msg() {
-                    alert("Please log in first to add this shoe to your favourites!");
-                  }
-                </script>
-                <!-- else, if game hasn't been favourited show up with add button -->
-              <!-- if variable favourited has length (i.e it exists) -->
+                <p>please login to add to these your shoes</p>
+            {# if shoes are in my shoes show remove#}
               {% elif shoe in user.shoes %}
-                <div id="favourite_button">
-                  <!-- have remove from favourites button -->
-                  <button onclick="location.href=
-                  '{{ url_for('delete', id=shoe.id)}}'" type="button">
-                   <h3> Remove from favourites </h3></button>
-                </div>
-                <!-- if game has been favourited, show up with remove button -->
+                  <p>Added to my shoes</p>
+              {# if shoes aren't in my shoes already show add button#}
               {% else %}
-                <div id="favourite_button">
+                <div>
                   <button onclick="location.href=
-                  '{{ url_for('favourite', id=shoe.id)}}'" type="button">
-                   <h3> Add to favourites </h3></button>
+                  '{{ url_for('add', id=shoe.id)}}'" type="button">
+                   <h3> Add to my shoes </h3></button>
                 </div>
               {% endif %}
     </div>
-    {% endfor %}    
+    {% endfor %}
 </body>
 
 

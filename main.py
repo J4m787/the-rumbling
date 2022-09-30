@@ -1,7 +1,9 @@
-from flask import Flask, render_template, request, flash, redirect, url_for, abort
+from flask import (Flask, render_template, request, flash, redirect,
+                   url_for, abort)
 import models
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import logout_user, login_user, LoginManager, current_user, login_required
+from flask_login import (logout_user, login_user, LoginManager, current_user,
+                         login_required)
 from forms import LoginForm, RegistrationForm
 
 
@@ -13,7 +15,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app, session_options={'autoflush': False})
 login_manager = LoginManager()
-login_manager.init_app(app) 
+login_manager.init_app(app)
 
 @login_manager.user_loader
 def load_user(id):
@@ -26,37 +28,39 @@ def home():
     return render_template('home.html')
 
 
-# route renders the Jordans page
+# route renders the bramd page
 @app.route("/brand/<int:id>")
 def brand(id):
     results = models.Brand.query.filter_by(id=id).first()
     return render_template('brand.html', results=results)
 
 
-# route renders the Jordans 2 page
+# route renders the silhouette page
 @app.route("/silhouette/<int:id>")
 def silhouette(id):
-    user = models.User.query.filter_by(id=current_user.id).first_or_404()
+    if current_user.is_authenticated:
+        user = models.User.query.filter_by(id=current_user.id).first()
+    else:
+        user = None
     results = models.Silhouette.query.filter_by(id=id).first()
     return render_template('table.html', results=results, user=user)
 
 
-@app.route("/my_favourites", methods=["GET", "POST"])
-@login_required  # requires user to be logged in to add favourite
-def favourites():
+#route renders the my_shoes page
+@app.route("/my_shoes", methods=["GET", "POST"])
+@login_required
+def user_shoes():
+    # get the current user
     results = models.User.query.filter_by(id=current_user.id).first_or_404()
-    user = models.User.query.filter_by(id=current_user.id).first_or_404()
-    
-    return render_template('table.html', results=results, user=user, title="My Favourite Shoes")
+    return render_template('myshoes.html', results=results, title="My Shoes")
 
 
-# Route to add shoe to favourites table
-@app.route("/favourite/<int:id>", methods=["GET", "POST"])
-@login_required  # requires user to be logged in to add favourite
-def favourite(id):
-    # Adds favourite shoe by assigining current user id to user id table
-    # and adds the shoe id to shoes id table.
-    user = models.User.query.filter_by(id=current_user.id).first_or_404()
+# Route to add shoe to usershoe table
+@app.route("/add/<int:id>", methods=["GET", "POST"])
+@login_required
+def add(id):
+    # adds to many to many relationship
+    user = models.User.query.filter_by(id=current_user.id).first()
     shoe = models.Shoe.query.filter_by(id=id).first()
     user.shoes.append(shoe)
     db.session.merge(user)
@@ -64,18 +68,17 @@ def favourite(id):
     return redirect(url_for("silhouette", id=shoe.silhouette.id))
 
 
-# route to remove a game from your favourites
+# route to remove a shoe from usershoes.
 @app.route("/delete/<int:id>", methods=["GET", "POST"])
-@login_required # requires user to be logged in to remove a favourited game
+@login_required
 def delete(id):
-    user = models.User.query.filter_by(
-        id=current_user.id
-    ).first_or_404()
+    # remove from many to many relationship
+    user = models.User.query.filter_by(id=current_user.id).first()
     shoe = models.Shoe.query.filter_by(id=id).first_or_404()
     user.shoes.remove(shoe)
     db.session.merge(user)
     db.session.commit()
-    return redirect(url_for("favourites"))
+    return redirect(url_for("user_shoes"))
 
 
 # route allows user to login
@@ -107,9 +110,10 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         user = models.User.query.filter_by(email=form.email.data).first()
-        # if it already exists it tells them
+        # if a user with the same email already exists
         if user is not None:
-            flash('User already exists')
+            # tell the user
+            flash('email is already being used')
         else:
             # puts email, and password into the database
             user = models.User(email=form.email.data)
@@ -129,5 +133,23 @@ def logout():
     return redirect(url_for('home'))
 
 
+# error handler for a 404 error
+@app.errorhandler(404)
+def error404(error):
+    return render_template("404.html", title="Error"), 404
+
+
+# error handler for a 401 error
+@app.errorhandler(401)
+def error401(error):
+    return render_template("401.html", title="Error"), 401
+
+
+# error handler for a 500 error
+@app.errorhandler(500)
+def error500(error):
+    return render_template("500.html", title="Error"), 500
+
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)

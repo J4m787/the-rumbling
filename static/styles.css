@@ -1,6 +1,6 @@
 #body {
-  
-    min-height: 100vh; 
+
+    min-height: 100vh;
     margin:0;
 }
 
@@ -34,7 +34,7 @@
     vertical-align: middle;
     margin-top: -2px;
     margin-left:50px;
-    
+
 }
 
 .title3:hover{
@@ -53,7 +53,7 @@
 }
 .nav_button {
     margin-left: 50px;
-    
+
     text-align: center;
     text-decoration:none ;
     font-family: 'Caveat', cursive;
@@ -62,7 +62,7 @@
     display: inline-block;
    border-radius: 100px;
    border: 2px solid #565254;
-   padding: 15px; 
+   padding: 15px;
    width: 150px;
    height: 30px;
    transition-duration: 0.4s;
@@ -113,12 +113,12 @@
     border: none;
     cursor: pointer;
   }
-  
+
   .dropdown {
     position: relative;
     display: inline-block;
   }
-  
+
   .dropdown-content {
     display: none;
     position: absolute;
@@ -130,7 +130,7 @@
     font-size: 12px;
     margin-right: 45px;
   }
-  
+
   .dropdown-content a {
     color: #565254;
     text-decoration: none;
@@ -139,12 +139,12 @@
     font-family: 'Caveat', cursive;
     font-size: 15px;
   }
-  
+
   .dropdown-content a:hover {
     background-color: #565254;
     color: #fffffa;
   }
-  
+
   .dropdown:hover .dropdown-content {
     display: block;
   }
@@ -215,20 +215,21 @@ ol li {
   grid-gap: 15px;
   grid-auto-rows:400px;
   overflow-x: hidden;
- 
+
 }
 
-.wrapper >div  {
+.wrapper > div  {
   font-size: 15px;
   padding: 10px;
   background: #fffffa;
   border: solid 1px black;
   border-radius: 10px;
-  margin: 100px;
+  margin: 50px;
   text-decoration: none;
   text-align: center;
   color:#93c48b;
 }
+
 .wrapper > div:nth-child(even){
   background: #fffffa;
 

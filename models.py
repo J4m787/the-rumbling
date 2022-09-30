@@ -7,7 +7,7 @@ from sqlalchemy.orm import relationship
 
 
 
-# Users and Champions association table many-many
+# Users and Shoes association table many-many
 UserShoe = db.Table('UserShoe',
     db.Column('id', db.Integer, primary_key=True, nullable=False),
     db.Column('user_id', db.Integer, db.ForeignKey('User.id')),
@@ -15,6 +15,7 @@ UserShoe = db.Table('UserShoe',
 )
 
 
+# classes things in users model
 class User(UserMixin, db.Model):
     __tablename__ = "User"
     id = db.Column(db.Integer, primary_key=True)
@@ -33,6 +34,7 @@ class User(UserMixin, db.Model):
         return '<User{}>'.format(self.email)
 
 
+# classes things in brand model
 class Brand(db.Model):
     __tablename__ = "Brand"
     id = db.Column(db.Integer, primary_key=True)
@@ -40,6 +42,7 @@ class Brand(db.Model):
     silhouettes = db.relationship('Silhouette', back_populates='brand')
 
 
+# classes things in Silhouette model
 class Silhouette(db.Model):
     __tablename__="Silhouette"
     id = db.Column(db.Integer, primary_key=True)
@@ -52,6 +55,7 @@ class Silhouette(db.Model):
     brand = db.relationship('Brand', back_populates='silhouettes')
 
 
+# classes things in Shoe model
 class Shoe(db.Model):
     __tablename__ = "Shoe"
     id = db.Column(db.Integer, primary_key=True)
@@ -60,4 +64,5 @@ class Shoe(db.Model):
     image = db.Column(db.Text)
     price = db.Column(db.Text)
     silhouette = db.relationship('Silhouette', back_populates='shoes')
-    users = db.relationship('User', secondary='UserShoe', back_populates='shoes')
+    users = db.relationship('User', secondary='UserShoe',
+                            back_populates='shoes')

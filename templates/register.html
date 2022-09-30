@@ -6,24 +6,33 @@
     </h1>
   </header>
 <main>
+  <center>
     <h1>Register</h1>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+          <div class="alert">
+            {{message}}
+          </div>
+        {% endfor %}
+        {% endif %}
+      {% endwith %}
     <form class="register" method="post">
     {{form.csrf_token}}
-    <p>{{form.email}}
+    <p>{{form.email}}</p>
     {% for error in form.email.errors %}
       <span style="color: red;">{{ error }}</span>
     {% endfor %}
-    </p>
-    <p>{{form.password}}
+    <p>{{form.password}}</p>
     {% for error in form.password.errors %}
       <span style="color: red;">{{ error }}</span>
-    {% endfor %}</p>
-    <p>{{form.password2}}
+    {% endfor %}
+    <p>{{form.password2}}</p>
     {% for error in form.password2.errors %}
       <span style="color: red;">{{ error }}</span>
-    {% endfor %}</p>
-    
+    {% endfor %}
     <p>{{form.submit(class="button")}}</p>
-    </form>    
+    </form>
+  </center>
 </main>
 {%endblock%}
