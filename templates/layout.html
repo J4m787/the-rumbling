@@ -19,10 +19,13 @@
     
     
 </a id="nav">
-     <a class="nav_button" href="{{url_for('brand',id=1)}}">Jordans</a>
-     <a class="nav_button" href="{{url_for('brand',id=2)}}">Adidas</a>
-     <a class="nav_button" href="{{url_for('brand',id=3)}}">Nike</a>
-     <a class="nav_button" href="{{url_for('brand',id=4)}}">Others</a>
+{% if current_user.is_authenticated %}
+    <a class="nav_button" href="{{url_for('favourites')}}">My Favourites</a>
+    {% endif %}
+    <a class="nav_button" href="{{url_for('brand',id=1)}}">Jordans</a>
+    <a class="nav_button" href="{{url_for('brand',id=2)}}">Adidas</a>
+    <a class="nav_button" href="{{url_for('brand',id=3)}}">Nike</a>
+    <a class="nav_button" href="{{url_for('brand',id=4)}}">Others</a>
 </a>
      
      {% if not current_user.is_authenticated %}
@@ -47,38 +50,6 @@
      {% block content %}
      {% endblock %}
 
-    <footer class="footer">
-        <div id="footer_headingspos">
-            <a class="footer_headings"  href="{{url_for('brand',id=1)}}">Jordans</a>
-            <a class="footer_headings"  href="{{url_for('brand',id=2)}}">Adidas</a>
-            <a class="footer_headings"  href="{{url_for('brand',id=3)}}">Nike</a>
-            <a class="footer_headings"  href="{{url_for('brand',id=4)}}">Others</a>
-        </div>
-<!---->        <ol id="footer_jordan">
-            <li > <a class ="footer_content"href="{{url_for('silhouette', id=1)}}"> Jordan 1 </a></li>
-            <li > <a class ="footer_content"href="{{url_for('silhouette', id=1)}}"> Jordan 3 </a></li>
-            <li > <a class ="footer_content"href="{{url_for('silhouette', id=1)}}">Jordan 4</a></li>
-            <li > <a class ="footer_content"href="{{url_for('silhouette', id=1)}}">Jordan 11</a></li>
-        </ol>
-        <ol id="footer_adida">
-            <li > <a class ="footer_content" href="{{url_for('silhouette', id=1)}}">Yeezy 350</a></li>
-            <li > <a class ="footer_content"href="{{url_for('silhouette', id=1)}}"> Yeezy 500</a></li>
-            <li > <a class ="footer_content" href="{{url_for('silhouette', id=1)}}">Yeezy 700</a></li>
-            <li > <a class ="footer_content"href="{{url_for('silhouette', id=1)}}"> Yeezy Slides</a></li>
-        </ol>
-        <ol id="footer_nike">
-            <li > <a class ="footer_content"href="{{url_for('silhouette', id=1)}}"> Nike Dunks</a></li>
-            <li > <a class ="footer_content"href="{{url_for('silhouette', id=1)}}"> Air Force one</a></li>
-            <li > <a class ="footer_content"href="{{url_for('silhouette', id=1)}}">Airmax 97</a></li>
-            <li > <a class ="footer_content"href="{{url_for('silhouette', id=1)}}">Nike Blazers</a></li>
-        </ol>
-        <ol id="footer_others">
-            <li > <a class ="footer_content"href="{{url_for('silhouette', id=1)}}"> New Balance 550</a></li>
-            <li > <a class ="footer_content"href="{{url_for('silhouette', id=1)}}">New Balance 990</a></li>
-            <li > <a class ="footer_content"href="{{url_for('silhouette', id=1)}}">New Balance 993</a></li>
-            <li > <a class ="footer_content"href="{{url_for('silhouette', id=1)}}">Chuck Taylor Converses</a></li>
-            
-    </footer>
 </body> 
 
 </html>

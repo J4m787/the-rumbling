@@ -18,7 +18,6 @@ UserShoe = db.Table('UserShoe',
 class User(UserMixin, db.Model):
     __tablename__ = "User"
     id = db.Column(db.Integer, primary_key=True)
-    favourite_id = db.Column(db.Integer, ForeignKey('Favourite.id'))
     email = db.Column(db.Text)
     password = db.Column(db.Text)
     shoes = db.relationship('Shoe', secondary='UserShoe',

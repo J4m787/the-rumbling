@@ -2,12 +2,12 @@
 {%block content%}
 
 <body>
-
+<h1>{{title}}</h1>
 <div class="wrapper">
     {% for shoe in results.shoes%}
     <div>
-        <a  href="{{url_for('home')}}"><img src="/{{shoe.image}}" alt="SHOE" height="100px" width="autocomplete"></a>
-        <p><b><a href="{{url_for('home')}}" class="deco"> {{shoe.name}}</a></b></p>
+        <img src="/{{shoe.image}}" alt="SHOE" height="100px" width="autocomplete">
+        <p><b> {{shoe.name}}</b></p>
         <p class="1">${{shoe.price}}</p>
                 <!-- if user not signed in, tell them to sign in before favouriting -->
                 {% if current_user.is_anonymous %}

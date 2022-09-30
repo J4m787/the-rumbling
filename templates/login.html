@@ -6,12 +6,29 @@
     </h1>
   </header>
 <main>
-    <form class="login" method="post">
-        {{ form.csrf_token }}
-        {{form.email()}}
-        {{form.password()}}
-        {{form.remember_me()}}
-        <input type="submit" value="Go">
-      </form>
+  <center>
+  <h1>LOGIN</h1>
+  {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+        <div class="alert">
+          {{message}}
+        </div>
+      {% endfor %}
+      {% endif %}
+    {% endwith %}
+<form clas="login" method="post">
+  <!-- Email input -->
+  {{form.csrf_token}}
+
+  <p>{{form.email}}</p>
+  <p>{{form.password}}</p>
+  <p>{{form.remember_me}} Remember</p>
+
+<p>Don't have an account?<br><a href="{{url_for('register')}}">Click here to Register</a></p>
+
+  <p>{{form.submit(class="button")}}</p>
+</form>
+</center>
 </main>
 {%endblock%}

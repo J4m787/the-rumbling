@@ -1,8 +1,9 @@
+<h2>Click on the shoes to view colourways</h2>
 <div class="grid-container">
     {% for silhouette in results.silhouettes%}
       <div class = "container">
         <a  href="{{url_for('silhouette', id=silhouette.id)}}" ><img src="/{{silhouette.image}}" alt="SHOE" height="100px" width="autocomplete"></a>
-        <p><b><a class="jordannames"  href="{{url_for('home')}}">{{silhouette.name}}</a></b></p>
+        <p><b><a class="jordannames"  href="{{url_for('silhouette', id=silhouette.id)}}">{{silhouette.name}}</a></b></p>
         <p class="descriptionr">{{silhouette.description}}</p>
       </div>
     {% endfor %}
